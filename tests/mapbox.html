@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mapbox Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v0.53.0/mapbox-gl.css">
+  <script src="https://static-assets.mapbox.com/gl-pricing/dist/mapbox-gl.js"></script>
+</head>
+
+<body class="flex flex-column h-100 justify-center">
+  <div id="map" class="center" style="width: 100%; height: 100%;"></div>
+  <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZHJ1a2VsbHkiLCJhIjoiY2p1ZGpsYzd1MDgyNTQ0bXRqbW5rbXk1dCJ9.IOyAszC7bL2GBhSRgCdAVQ';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [-122.267904, 37.808699], // starting position
+      zoom: 10
+    });
+    // Disable map zoom when using scroll
+    map.scrollZoom.disable();
+  </script>
+
+</body>
+
+</html>
