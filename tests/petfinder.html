@@ -34,15 +34,16 @@
         let accessToken = response.access_token;
         let animal = "dog";
         if (accessToken.length > 0) {
-          console.log(accessToken);
+          // console.log(accessToken);
           fetch(`https://api.petfinder.com/v2/animals?type=${animal}`, {
             headers: {
-              "Authorization": "Bearer " + accessToken,
+              "Access-Control-Allow-Headers" : "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
               "Access-Control-Allow-Origin": "*",
-              "Access-Control-Expose-Headers" :  "Access-Control-Allow-Headers"
+              "Access-Control-Allow-Credentials": "true",
+              "Authorization": "Bearer " + accessToken
             },
             method: "GET",
-            // mode: "cors"
+            mode: "cors"
           })
             .then(result => result.json())
             .then(response => {
