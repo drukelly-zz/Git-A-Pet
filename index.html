@@ -5,14 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Git-A-Pet</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css">
 </head>
-<body>
-  <main>
-    
-  </main>
+<body class="sans-serif">
+  <div class="center mw9-ns ph2 ph4-ns">
+    <header class="flex items-center">
+      <h1>Git-A-Pet</h1>
+    </header>
+    <main class="pb3 fl w-100">
+      
+    </main>
+  </div>
 
   <script>
-    
+    const main = document.querySelector('main')
+    fetch('/api/getpets')
+      .then(result => result.json())
+      .then(response => {
+        let animals = response[0].animals
+        animals.forEach(item => {
+          let template = `
+          <a href="${item.url}" class="blue dim link">
+            <article class="ba b--black-10 bg-white br3 fl-ns mr3 mb3 mw5-ns pa3 pa4-ns w-100">
+              <div class="tc">
+                <img src="${item.photos[0].small}" class="br-100 dib h3 w3" alt="">
+                <h1 class="f4">${item.name}</h1>
+                <hr class="bb b--black-10 bw1 mw3">
+              </div>
+              <p class="black-70 center f6 lh-copy measure tc">
+                ${item.description}
+              </p>
+            </article>
+          </a>`
+          main.innerHTML += template
+        })
+      })
   </script>
 </body>
 </html>
