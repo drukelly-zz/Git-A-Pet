@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Petfinder Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css">
+</head>
+
+<body class="pa4 sans-serif">
+  <h1 class="b--black-25 bb f4 pb3 lh-title">Open The Console</h1>
+  <p class="lh-copy">to see the example response/result</p>
+
+  <script>
+    fetch('data.json')
+      .then(result => result.json())
+      .then(response => {
+        console.dir(response.animals);
+        response.animals.forEach(animal => {
+          console.log(animal.url);
+        })
+      });
+  </script>
+</body>
+
+</html>

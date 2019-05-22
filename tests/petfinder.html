@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Petfinder Example</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css">
+</head>
+
+<body class="pa4 sans-serif">
+  <h1 class="b--black-25 bb f4 pb3 lh-title">Open The Console</h1>
+  <p class="lh-copy">to see the example response/result</p>
+
+  <script>
+    const CLIENT_ID = "Q6SuoRux30VA6cSpwUfIKtRrV5grjWhfHBRNljGK7nHjrTTnu9";
+    const CLIENT_SECRET = "ccwZj7nyeVk5CYhiIyZxU7vM75j5fU7woxmDXGwY";
+    const formData = new URLSearchParams();
+
+    formData.append("grant_type", "client_credentials");
+    formData.append("client_id", CLIENT_ID);
+    formData.append("client_secret", CLIENT_SECRET);
+
+    fetch('https://api.petfinder.com/v2/oauth2/token', {
+      body: formData.toString(),
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      },
+      method: "POST"
+    })
+      .then(result => result.json())
+      .then(response => {
+        let accessToken = response.access_token;
+        let animal = "dog";
+        if (accessToken.length > 0) {
+          // console.log(accessToken);
+          fetch(`https://api.petfinder.com/v2/animals?type=${animal}`, {
+            headers: {
+              "Access-Control-Allow-Headers" : "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Credentials": "true",
+              "Authorization": "Bearer " + accessToken
+            },
+            method: "GET",
+            mode: "cors"
+          })
+            .then(result => result.json())
+            .then(response => {
+              console.log(`fetch => ${response}`);
+            });
+        } else {
+          console.log("No access token");
+        }
+      });
+  </script>
+</body>
+
+</html>
